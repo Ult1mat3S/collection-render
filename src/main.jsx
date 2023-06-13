@@ -28,6 +28,11 @@ export const course = [
         exercises: 11,
         id: 4,
       },
+      {
+        name: "Testing test",
+        exercises: 11,
+        id: 5,
+      },
     ],
   },
 ];
