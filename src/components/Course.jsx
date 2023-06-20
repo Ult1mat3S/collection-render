@@ -10,7 +10,7 @@ const Course = ({ course }) => {
   return (
     <div>
       {course[0].parts.map((courses) => (
-        <p>
+        <p key={courses.id}>
           {courses.name}: {courses.exercises}
         </p>
       ))}
