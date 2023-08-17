@@ -38,7 +38,6 @@ const App = () => {
 
   const handleNameChange = (e) => {
     setNewName(e.target.value);
-    console.log("changed");
   };
 
   const handleNumberChange = (e) => {
@@ -46,7 +45,6 @@ const App = () => {
   };
 
   const handleSearchFilter = (e) => {
-    console.log("test");
     setSearchFilter(e.target.value);
   };
 
