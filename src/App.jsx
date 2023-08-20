@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -12,8 +13,6 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchFilter, setSearchFilter] = useState("");
-
-  const contactsToShow = persons.filter((person) => person.name.toLowerCase().includes(searchFilter.toLowerCase()));
 
   const addName = (e) => {
     e.preventDefault();
@@ -63,11 +62,7 @@ const App = () => {
         addName={addName}
       />
       <h2>Contacts</h2>
-      {contactsToShow.map((person) => (
-        <p key={person.name}>
-          {person.name} - {person.number}
-        </p>
-      ))}
+      <Persons persons={persons} searchFilter={searchFilter} />
     </div>
   );
 };
