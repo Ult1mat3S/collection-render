@@ -1,6 +1,6 @@
 import axios from "axios";
 const baseUrl =
-  "http://localhost:3001/persons" || "https://raw.githubusercontent.com/Ult1mat3S/collection-render/main/db.json";
+  "https://raw.githubusercontent.com/Ult1mat3S/collection-render/main/db.json" || "http://localhost:3001/persons";
 
 const getAll = () => {
   const request = axios.get(baseUrl);
