@@ -69,7 +69,7 @@ const App = () => {
     const personId = filteredPerson[0].id;
     if (window.confirm(`Delete ${personName}?`)) {
       personService.remove(personId);
-      console.log(`${personName} deleted`);
+      // console.log(`${personName} deleted`);
     }
   };
 
