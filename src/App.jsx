@@ -33,23 +33,21 @@ const App = () => {
       number: newNumber,
     };
 
-    const isNameInArray =
-      persons.find((el) => {
-        return el.name === newName;
-      }) !== undefined;
+    const existingPersonName = persons.find((el) => el.name === newName);
+    const existingPersonNumber = persons.find((el) => el.number === newNumber);
 
-    const isNumberInArray =
-      persons.find((el) => {
-        return el.number === newNumber;
-      }) !== undefined;
+    if (existingPersonName) {
+      const confirmMessageName = `${newName} is already added to the phonebook, replace the old number with a new one?`;
 
-    if (isNameInArray && newName !== "") {
-      alert(`${newName} is already added to the phonebook, replace the old number with a new one?`);
-      updatePerson();
-    }
-    if (isNumberInArray && newNumber !== "") {
-      alert(`${newNumber} is already added to the phonebook, replace the old number with a new one?`);
-      updatePerson();
+      if (window.confirm(confirmMessageName)) {
+        updatePerson(existingPersonName.id, newName, newNumber);
+      }
+    } else if (existingPersonNumber) {
+      const confirmMessageNumber = `${newNumber} is already added to the phonebook, replace the old number with a new one?`;
+
+      if (window.confirm(confirmMessageNumber)) {
+        updatePerson(existingPersonNumber.id, newName, newNumber);
+      }
     } else {
       personService.create(nameObject).then((returnedPerson) => {
         setErrorMessage(`Added ${newName}`);
@@ -74,14 +72,15 @@ const App = () => {
   };
 
   const updatePerson = (id, name, number) => {
-    const filteredPerson = persons.filter((person) => person.id === id);
-    console.log(filteredPerson);
-    // const personName = filteredPerson[0].name;
-    // const personId = filteredPerson[0].id;
-    // if (window.confirm(`Update ${personName}?`)) {
-    //   personService.update(personId);
-    //   console.log(`${personName} updated`);
-    // }
+    const updatedPersons = persons.map((person) => (person.id === id ? { ...person, name, number } : person));
+
+    personService.update(id, { name, number }).then(() => {
+      setPersons(updatedPersons);
+      setErrorMessage(`Updated ${name}`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    });
   };
 
   const handleNameChange = (e) => {
